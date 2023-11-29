@@ -1,0 +1,19 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    & .nav__ul {
+        display: flex;
+        margin-right: 1rem;
+
+        & li {
+            list-style-type: none;
+            margin-right: .5rem;
+            & a{
+                color: #fff;
+            }
+        }
+
+    }
+
+}

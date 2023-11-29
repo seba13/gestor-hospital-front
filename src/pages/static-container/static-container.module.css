@@ -1,0 +1,7 @@
+.static-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    background: radial-gradient(158.24% 184.9% at 160.24% -24.02%, #057C88 0%, #00151F 100%);
+}
