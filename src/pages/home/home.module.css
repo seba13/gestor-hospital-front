@@ -1,3 +1,66 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-right: 3rem;
+
+
+    & .title {
+        /* width: 100%; */
+        /* align-self: flex-end; */
+        letter-spacing: .2rem;
+        margin-top: 70px;
+        font-size: 6.5rem;
+        font-family: 'Bebas Neue', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        max-width: 550px;
+        text-align: end;
+        /* margin-right: 3rem; */
+    }
 
 
 
+
+
+}
+
+
+
+
+@media screen and (max-width: 800px) and (orientation: portrait) {
+    .home {
+        display: flex;
+        justify-content: flex-start;
+        margin-top: 10px;
+        align-items: center;
+        padding: 0;
+
+        & .title {
+            margin-top: 0px;
+            margin-right: 0;
+            text-align: center;
+            font-size: 3rem;
+            font-family: 'Bebas Neue', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+        }
+
+        & .booking-form {
+            flex-direction: column;
+        }
+
+    }
+}
+
+@media screen and (max-width: 800px) and (orientation: landscape) {
+
+    .home {
+        margin-top: 2rem;
+        align-items: center;
+        padding: 0;
+        .title {
+            margin-top: 0px;
+            text-align: right;
+            font-size: 3rem;
+        }
+    }
+
+}

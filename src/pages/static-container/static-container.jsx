@@ -6,25 +6,31 @@ import styles from './static-container.module.css';
 const StaticContainer = () => {
 	const navItems = [
 		{
-			text: 'Home',
+			text: 'HOME',
 			path: '#home',
 		},
 		{
-			text: 'About',
+			text: 'ABOUT',
 			path: '#about',
 		},
 		{
-			text: 'Contact',
+			text: 'CONTACT',
 			path: '#contact',
 		},
 		{
-			text: 'Sign In',
+			text: 'SIGN IN',
 			path: '#sign-in',
 		},
 	];
 
 	return (
 		<main className={`${styles['static-container']}`}>
+			<div className={styles['static-container__images']}>
+				<div className={`${styles.virus} ${styles.virus__1}`}></div>
+				<div className={`${styles.virus} ${styles['virus__d-1']}`}></div>
+				<div className={`${styles.virus} ${styles['virus__d-2']}`}></div>
+			</div>
+
 			<NavStatic navItems={navItems}></NavStatic>
 
 			<StaticSection></StaticSection>
