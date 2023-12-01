@@ -23,9 +23,11 @@ const ListSpecialty = () => {
 	};
 
 	useEffect(() => {
-		fetch('https://jsonplaceholder.typicode.com/users')
+		fetch('http://localhost:80/medicos/especialidades')
 			.then(result => result.json())
-			.then(json => setlistSpecialty(json.map(spec => spec.name)));
+			.then(json => {
+				return setlistSpecialty(json.map(spec => spec.especialidad));
+			});
 	}, []);
 
 	useEffect(() => {
