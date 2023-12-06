@@ -9,8 +9,14 @@
     background-repeat: no-repeat;
     position: relative;
     z-index: 10;
-
     overflow: hidden;
+
+
+
+    &.fade-in-animation-medical {
+        animation: fade-in-medical 1.3s ease;
+
+    }
 
 
     & .static-container__images {
@@ -18,7 +24,12 @@
         width: 100%;
         height: 100%;
         overflow: hidden;
-        z-index: 1;
+        z-index: -1;
+
+        &.fade-in {
+
+            animation: fade-in 1s ease;
+        }
 
         & .virus {
 
@@ -72,5 +83,26 @@
 
     to {
         transform: translateY(50%)
+    }
+}
+
+@keyframes fade-in {
+
+    0% {
+        transform: translateY(10%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+
+
+}
+
+@keyframes fade-in-medical {
+    0% {
+        background-position: 100% 100%;
     }
 }

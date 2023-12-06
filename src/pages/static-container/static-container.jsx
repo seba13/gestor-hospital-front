@@ -1,24 +1,31 @@
+import { useEffect } from 'react';
 import NavStatic from '../static-nav/static-nav';
 import StaticSection from '../static-section/static-section';
 
 import styles from './static-container.module.css';
 
 const StaticContainer = () => {
+	useEffect(() => {
+		document.querySelector(`.${styles['static-container']}`).classList.add(`${styles['fade-in-animation-medical']}`);
+
+		document.querySelector(`.${styles['static-container__images']}`).classList.add(`${styles['fade-in']}`);
+	}, []);
+
 	const navItems = [
 		{
-			text: 'HOME',
+			text: 'INICIO',
 			path: '#home',
 		},
 		{
-			text: 'ABOUT',
+			text: 'NOSOTROS',
 			path: '#about',
 		},
 		{
-			text: 'CONTACT',
+			text: 'CONTACTO',
 			path: '#contact',
 		},
 		{
-			text: 'SIGN IN',
+			text: 'INICIAR SESIÓN',
 			path: '#sign-in',
 		},
 	];

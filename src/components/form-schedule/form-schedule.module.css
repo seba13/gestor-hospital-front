@@ -1,4 +1,4 @@
-.booking-form {
+.schedule-form {
 
     /* margin-right: 3rem; */
     /* max-width: 700px; */
@@ -10,6 +10,13 @@
     align-items: center;
     border-radius: 1.625rem;
     padding: .5rem 2rem;
+
+
+    &.fade-in {
+        animation: fade-in 1s cubic-bezier(.26, .53, .74, 1.48);
+
+    }
+
 
     & .form-group {
         display: flex;
@@ -37,6 +44,12 @@
         & .span-svg {
             display: flex;
             align-items: center;
+
+
+            &.span-svg__id-card {
+                width: 32px;
+            }
+
         }
 
         & .span-svg,
@@ -54,6 +67,7 @@
 
     & .form-group__specialty {
         position: relative;
+
         & .list-especialty {
             padding-left: 0;
             position: absolute;
@@ -75,7 +89,7 @@
     }
 
 
-    & .booking-form__submit {
+    & .schedule-form__submit {
         border: none;
         outline: none;
         font-size: 1.125rem;
@@ -91,7 +105,7 @@
 
 /* 012732 */
 @media(hover:hover) {
-    .booking-form {
+    .schedule-form {
         & .form-group:hover {
             background-color: var(--bg-color-green);
         }
@@ -99,7 +113,7 @@
         & .form-group__submit:hover {
             background-color: inherit;
 
-            & .booking-form__submit {
+            & .schedule-form__submit {
                 background-color: var(--bg-color-green);
                 color: var(--color-white);
             }
@@ -125,10 +139,36 @@
 }
 
 
+@media screen and (max-width: 780px) {
 
-@media screen and (max-width: 600px) {
+    .schedule-form {
+        & .form-group {
+            padding: 1rem .5rem;
+        }
+    }
+}
 
-    & .booking-form {
+
+
+@media screen and (max-width: 850px) {
+
+    & .schedule-form {
         flex-direction: column;
     }
+}
+
+
+@keyframes fade-in {
+
+    0% {
+        transform: translateX(50%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+
+
 }

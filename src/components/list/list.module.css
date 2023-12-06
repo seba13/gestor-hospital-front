@@ -1,0 +1,93 @@
+& .form-group__list {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1rem;
+    height: 2.375rem;
+    border-radius: .5rem;
+    transition: background-color .2s ease;
+
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+
+    & .span-svg {
+        display: flex;
+        align-items: center;
+    }
+
+    & .span-svg,
+    & .span-text {
+        margin-right: .25rem;
+    }
+
+    & .span-text {
+        text-align: center;
+        /* min-width: 100px; */
+    }
+
+    &>:first-child {
+        display: block;
+        text-align: right;
+        flex-grow: 1;
+    }
+
+}
+
+
+.form-group {
+    position: relative;
+
+    & .list {
+        padding-left: 0;
+        position: absolute;
+        top: 80%;
+        left: 0%;
+        color: var(--color-green);
+        background-color: var(--color-white);
+        border-radius: .25rem;
+        max-height: 18.75rem;
+        overflow-y: auto;
+
+        & li {
+            padding: 1rem;
+            list-style-type: none;
+        }
+
+    }
+
+
+    /* Scrollbar */
+
+    & .list {
+        /* For Firefox */
+        overflow-y: auto;
+        scrollbar-color: var(--bg-color-green-2) var(--bg-color-green);
+        scrollbar-width: thin;
+    }
+
+    /* For Chrome and other browsers except Firefox */
+    & .list::-webkit-scrollbar {
+        width: 0.5em;
+        background-color: var(--bg-color-green);
+    }
+
+    & .list::-webkit-scrollbar-thumb {
+        background-color: var(--bg-color-green-2);
+    }
+
+}
+
+
+
+
+
+
+
+
+@media(hover:hover) {
+
+    & .form-group:hover {
+        background-color: var(--bg-color-green);
+    }
+
+}

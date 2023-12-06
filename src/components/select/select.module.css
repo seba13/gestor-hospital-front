@@ -1,0 +1,55 @@
+.select {
+    padding-left: 0;
+    position: absolute;
+    z-index: 800;
+    top: 80%;
+    right: 0;
+    color: var(--color-green);
+    background-color: var(--color-white);
+    border-radius: .25rem;
+    max-height: 300px;
+    overflow-y: auto;
+    width: 200px;
+    max-width: 260px;
+
+    & li {
+        padding: 1rem;
+        list-style-type: none;
+    }
+
+}
+
+
+/* Scrollbar */
+
+.select {
+    /* For Firefox */
+    overflow-y: auto;
+    scrollbar-color: var(--bg-color-green-2) var(--bg-color-green);
+    scrollbar-width: thin;
+}
+
+/* For Chrome and other browsers except Firefox */
+.select::-webkit-scrollbar {
+    width: 0.5em;
+    background-color: var(--bg-color-green);
+}
+
+.select::-webkit-scrollbar-thumb {
+    background-color: var(--bg-color-green-2);
+}
+
+
+@media(hover:hover) {
+
+    .select {
+
+        & li:hover {
+            background-color: var(--bg-color-green);
+            color: var(--color-white);
+        }
+
+
+    }
+
+}

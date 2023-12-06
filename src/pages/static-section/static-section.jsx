@@ -33,7 +33,7 @@ const StaticSection = () => {
 
 		document
 			.querySelector(`section.${styles['static-section']}`)
-			.addEventListener('wheel', handleScroll);
+			.addEventListener('wheel', handleScroll,{passive: true});
 
 		return () => {
 			document

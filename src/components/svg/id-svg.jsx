@@ -4,6 +4,8 @@ const IdSVG = props => (
 		className='si-glyph si-glyph-id-badge'
 		viewBox='0 0 17 17'
 		{...props}
+		width={'100%'}
+		height={'100%'}
 	>
 		<title>{'81'}</title>
 		<path

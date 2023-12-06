@@ -7,7 +7,7 @@
     z-index: 1000;
 
 
-    animation: animation-appear 1s ease;
+    animation: fade-in 1s ease;
 
     & .nav__logo {
         font-size: 2rem;
@@ -59,7 +59,7 @@
 
 }
 
-@keyframes animation-appear {
+@keyframes fade-in {
 
     0% {
         transform: translateY(50%);
