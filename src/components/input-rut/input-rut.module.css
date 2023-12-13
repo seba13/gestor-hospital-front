@@ -1,0 +1,39 @@
+.form-group {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1rem;
+    height: 2.375rem;
+    border-radius: .5rem;
+    transition: background-color .2s ease;
+
+    & .input-text {
+        width: 120px;
+        border: none;
+        background-color: transparent;
+        outline: none;
+        border-bottom: 1px solid #fff;
+        color: #fff;
+        /* text-align: center; */
+
+        &::placeholder {
+            color: #aaaa;
+        }
+
+    }
+
+    & .span-svg {
+        display: flex;
+        align-items: center;
+
+
+        &.span-svg__id-card {
+            width: 32px;
+        }
+
+    }
+
+    & .span-svg,
+    & .span-text {
+        margin-right: .25rem;
+    }
+}

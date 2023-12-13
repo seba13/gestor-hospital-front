@@ -42,9 +42,12 @@
     & .nav__container-tel {
         display: flex;
         align-items: center;
+       
 
         & .nav__tel-svg {
             padding-right: .5rem;
+            width: 36px;
+            height: 36px;
         }
 
         & .nav__tel {

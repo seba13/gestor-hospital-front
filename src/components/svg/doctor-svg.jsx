@@ -2,12 +2,14 @@ const DoctorSVG = props => (
 	<svg
 		xmlns='http://www.w3.org/2000/svg'
 		xmlSpace='preserve'
-		width={200}
-		height={200}
+		// width={200}
+		// height={200}
 		fill='#fff'
 		stroke='#fff'
 		viewBox='0 0 201.324 201.324'
 		{...props}
+		width={'100%'}
+		height={'100%'}
 	>
 		<circle cx={95.596} cy={10.083} r={10.083} />
 		<circle cx={149.018} cy={10.083} r={10.083} />

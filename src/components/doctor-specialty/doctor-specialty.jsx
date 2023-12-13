@@ -2,7 +2,7 @@ import useDragDoctor from '../../hooks/use-drag-doctor';
 import styles from './doctor-specialty.module.css';
 import React from 'react';
 
-const DoctorSpecialty = ({ updateData, medicosEspecialidad, selectDoctor, selectedDoctor }) => {
+const DoctorSpecialty = ({ updateData, medicosEspecialidad, selectDoctor, idSelectedDoctor }) => {
 	const { onPointerDownHandler, onPointerMoveHandler, onPointerCancelHandler } = useDragDoctor();
 
 	return (
@@ -11,48 +11,42 @@ const DoctorSpecialty = ({ updateData, medicosEspecialidad, selectDoctor, select
 			onPointerDown={onPointerDownHandler}
 			onPointerMove={onPointerMoveHandler}
 			onPointerCancel={onPointerCancelHandler}
-			// onChange={e => {
-			// 	console.log('entra aca');
-			// 	// cambiar por id de docor
-			// 	setEndPointFechasDoctor('endpoint');
-
-			// 	// updateData({ selectDoctor: e.target.value });
-			// }}
 		>
+			<h2 className={styles.container__title}>Seleccione un médico</h2>
 			{/* ARRAY DOCTORES POR ESPECIALIDAD */}
 			{medicosEspecialidad?.map((doctor, index) => {
 				return (
-					<div key={doctor.id} className={`${styles['wrapper-doctor__element']}`}>
+					<div key={doctor.idMedico} className={`${styles['wrapper-doctor__element']}`}>
 						<input
 							type='radio'
 							name='doctor'
-							id={doctor.id}
+							id={doctor.idMedico}
 							className={`${styles['input-radio']} ${styles.input__hidden}`}
-							value={doctor.id}
+							value={doctor.idMedico}
 							required
 							onChange={e => {
 								// cambiar por id de docor
-								updateData({ endPointDateDoctor: `http://localhost:80/medicos/${doctor.id}/fechas` });
+								// updateData({ endPointDateDoctor: `http://localhost:80/medicos/${doctor.idMedico}/fechas` });
 
-								console.log(`http://localhost:80/medicos/${doctor.id}/fechas`);
+								// almacena id medico en form step
+								updateData({ idSelectedDoctor: doctor.idMedico });
+								updateData({ selectedDoctor: doctor.idMedico });
 
-								// updateData({ endPointDateDoctor: 'endpoint' });
-								updateData({ selectedDoctor: doctor.id });
-
-								selectDoctor(doctor.id);
+								// actualiza el endpoint
+								selectDoctor(doctor.idMedico);
 							}}
-							checked={doctor.id === selectedDoctor}
+							checked={doctor.idMedico === idSelectedDoctor}
 						/>
 
 						<label
-							htmlFor={doctor.id}
+							htmlFor={doctor.idMedico}
 							// id={doctor.id}
 							className={`${styles['doctor-element']}`}
 						>
-							{doctor.img && <img src={doctor.img}></img>}
+							{doctor.imagenUrl && <img src={doctor.imagenUrl}></img>}
 
 							<div className={`${styles.text__container}`}>
-								<h3 className={`${styles.title}`}>{`Dr. ${doctor.nombre} ${doctor.apellido}`}</h3>
+								<h3 className={`${styles.title}`}>{`Dr. ${doctor.nombre} ${doctor.paterno} ${doctor.materno}`}</h3>
 								<p className={`${styles.specialty}`}>{doctor.especialidad}</p>
 							</div>
 						</label>

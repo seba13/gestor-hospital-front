@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
 import styles from '../components/step-form/step-form.module.css';
 
-const useSaveSchedule = hideSchedule => {
+const useSaveFormAppointment = hideSchedule => {
 	const [animationEndContainer, setAnimationEndContainer] = useState(false);
 	const [animationEndWrapper, setAnimationEndWrapper] = useState(false);
 
 	const animationEndCb = e => {
-		console.log(e.animationName);
-
 		if (e.animationName === `${styles['fade-out-bg']}`) setAnimationEndWrapper(true);
 
 		if (e.animationName === `${styles['fade-out-bg']}`) setAnimationEndContainer(true);
@@ -20,11 +18,11 @@ const useSaveSchedule = hideSchedule => {
 
 	useEffect(() => {
 		const wrapper = document.querySelector(`.${styles['wrapper-date-schedule']}`);
-		
+
 		wrapper.classList.add(`${styles['fade-in-bg']}`);
 
 		const container = document.querySelector(`.${styles['date-schedule-container']}`);
-		
+
 		container.classList.add(`${styles['fade-in']}`);
 
 		wrapper.addEventListener('animationend', animationEndCb);
@@ -59,9 +57,6 @@ const useSaveSchedule = hideSchedule => {
 		const wrapperContainer = e.target.closest(`.${styles['wrapper-date-schedule']}`);
 		const container = e.target.closest(`.${styles['date-schedule-container']}`);
 
-		console.log(wrapperContainer);
-		console.log(container);
-
 		wrapperContainer.classList.add(styles['fade-out-bg']);
 		container.classList.add(`${styles['fade-out']}`);
 	};
@@ -74,4 +69,4 @@ const useSaveSchedule = hideSchedule => {
 	};
 };
 
-export default useSaveSchedule;
+export default useSaveFormAppointment;

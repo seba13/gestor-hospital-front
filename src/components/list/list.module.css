@@ -20,6 +20,16 @@
         margin-right: .25rem;
     }
 
+    & .span-svg {
+        width: 28px;
+        height: 28px;
+
+        &.span-svg--drop-down{
+            width: 15px;
+            height: 15px;
+        }
+    }
+
     & .span-text {
         text-align: center;
         /* min-width: 100px; */

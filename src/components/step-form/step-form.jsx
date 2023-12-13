@@ -1,54 +1,91 @@
 import styles from './step-form.module.css';
-import DateSchedule from '../date-schedule/date-schedule';
-import useSaveSchedule from '../../hooks/use-save-schedule';
+import StepDateDoctor from '../step-date-doctor/step-date-doctor';
+import useSaveSchedule from '../../hooks/use-save-form-appointments';
 import CloseSVG from '../svg/close-svg';
 import UseStepForm from '../../hooks/use-step-form';
-import { useState } from 'react';
-import FormScheduleUser from '../form-schedule-user/form-schedule-user';
+import { useEffect, useState } from 'react';
+import StepDataPatient from '../step-data-patient/step-data-patient';
+
+import validationForm from '../../helpers/validationForm';
 
 const StepForm = ({ hideSchedule, endPointMedicosEspecialidad }) => {
 	const initialData = {
-		selectedDoctor: '',
-		selectedDateDoctor: '',
-		selectedSchedule: '',
-		endPointDateDoctor: '',
-		endPointScheduleDoctor: '',
+		idSelectedDoctor: undefined, // id medico seleccionado
+		selectedDoctor: undefined, // medico seleccionado
+		idSelectedSchedule: undefined, // id cita seleccionada
+		selectedSchedule: undefined, // hora seleccionada
+		idSelectedDate: undefined, // idFecha seleccionada
+		selectedDate: undefined, // fecha seleccionada
+		selectedYear: undefined, // anio seleccionado
+		selectedMonth: undefined, // mes seleccionado
+		selectedDay: undefined, // dia seleccionado
+		dayOfWeek: undefined, // dia semana seleccionado
+		duracionCita: undefined,
+		// endPointDateDoctor: '',
+		// endPointScheduleDoctor: '',
 	};
+
 	const [data, setData] = useState(initialData);
 
 	const updateData = input => {
 		setData(currData => {
 			return { ...currData, ...input };
 		});
+
+		if (input.selectedDate) {
+			setData(currData => {
+				return { ...currData, selectedSchedule: undefined, idSelectedSchedule: undefined };
+			});
+		}
 	};
 
-	// const { handleSaveschedule, cancelSchedule } = useSaveSchedule(hideSchedule);
+	useEffect(() => {
+		console.log(data);
+	}, [data]);
+
 	const { handleCancelSchedule } = useSaveSchedule(hideSchedule);
 
-	// const steps = [<DateSchedule key={0} />, <h1 key={1}>Step 2</h1>];
-
 	const { step, back, next, isFirstStep, isLastStep } = UseStepForm([
-		<DateSchedule key={0} {...data} updateData={updateData} endPointMedicosEspecialidad={endPointMedicosEspecialidad} />,
-		<FormScheduleUser key={1} {...data} updateData={updateData}></FormScheduleUser>,
+		<StepDateDoctor
+			key={0}
+			{...data}
+			updateData={updateData}
+			endPointMedicosEspecialidad={endPointMedicosEspecialidad}
+		/>,
+		<StepDataPatient key={1} {...data} updateData={updateData}></StepDataPatient>,
 	]);
 
-	// useEffect(() => {
-	// 	document.querySelector(`.${styles['wrapper-date-schedule']}`).classList.add(`${styles['fade-in-bg']}`);
-	// 	document.querySelector(`.${styles['date-schedule-container']}`).classList.add(`${styles['fade-in']}`);
+	const inputValidation = () => {
+		const inputs = [
+			{
+				type: 'checkbox',
+				id: data.idSelectedDoctor,
+				value: data.selectedDoctor,
+				name: 'select-doctor',
+			},
+			{
+				type: 'checkbox',
+				id: data.idSelectedDate,
+				value: data.selectedDate,
+				name: 'select-date',
+			},
+			{
+				type: 'checkbox',
+				id: data.idSelectedSchedule,
+				value: data.selectedSchedule,
+				name: 'select-appointment',
+			},
+		];
 
-	// 	return () => {
-	// 		document.querySelector(`.${styles['wrapper-date-schedule']}`).classList.remove(`${styles['fade-in-bg']}`);
-	// 		document.querySelector(`.${styles['date-schedule-container']}`).classList.remove(`${styles['fade-in']}`);
-	// 	};
-	// });
+		return validationForm(inputs);
+	};
 
 	return (
 		<div className={`${styles['wrapper-date-schedule']} `}>
 			<div className={`${styles['date-schedule-container']} `}>
-				<span className={styles.span__close} onClick={handleCancelSchedule}>
+				<span className={`${styles['span-svg']} ${styles.span__close}`} onClick={handleCancelSchedule}>
 					{<CloseSVG width={24} height={24} />}
 				</span>
-				{/* <DateSchedule></DateSchedule> */}
 				{step}
 				<div className={`${styles.form_group}  ${styles.form_group__button}`}>
 					{!isFirstStep && (
@@ -67,8 +104,11 @@ const StepForm = ({ hideSchedule, endPointMedicosEspecialidad }) => {
 							type='submit'
 							className={`${styles['button-submit']}`}
 							onClick={e => {
-								// e.preventDefault();
-								next();
+								e.preventDefault();
+
+								if (inputValidation()) {
+									next();
+								}
 							}}
 						>
 							CONTINUAR

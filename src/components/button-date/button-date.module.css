@@ -1,0 +1,67 @@
+.form-group {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1rem;
+    height: 2.375rem;
+    border-radius: .5rem;
+    transition: background-color .2s ease;
+
+    cursor: pointer;
+
+    &.position__fixed {
+        position: fixed;
+        bottom: 230px;
+        /* right: 10px; */
+        z-index: 260;
+    }
+
+    &.position__absolute {
+        position: absolute;
+        top: 0;
+        right: 0px;
+        z-index: 260;
+    }
+
+    & .span-svg {
+        display: flex;
+        align-items: center;
+
+        width: 28px;
+        height: 28px;
+
+        &.span-svg--drop-down {
+            width: 15px;
+            height: 15px;
+            transform-origin: center;
+            transition: transform .25s ease;
+
+            &.open {
+                transform: rotate(-90deg);
+            }
+        }
+
+        &.span-svg__id-card {
+            width: 32px;
+        }
+
+    }
+
+    & .span-svg,
+    & .span-text {
+        margin-right: .25rem;
+    }
+
+    &.form-group__date {
+        cursor: pointer;
+        user-select: none;
+    }
+}
+
+
+
+@media(hover:hover) {
+
+    & .form-group:hover {
+        background-color: var(--bg-color-green);
+    }
+}

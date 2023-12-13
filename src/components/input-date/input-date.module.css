@@ -1,0 +1,197 @@
+.container {
+    position: relative;
+    width: 100%;
+    /* height: 100%; */
+    padding: 2rem;
+    top: 0;
+    right: 0;
+    min-height: 380px;
+    height: 420px;
+    max-height: 420px;
+    padding-top: 2.5rem;
+    z-index: 260;
+    background-color: #009bac;
+    /* border-radius: 1rem; */
+    transform-origin: center;
+    animation: fade-in .5s ease;
+
+    &.fade-out {
+        animation: fade-out .5s ease forwards;
+    }
+
+    & .container__header {
+
+        display: flex;
+        align-items: center;
+
+        .pagination {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+
+
+            & .title__calendario {
+                width: 250px;
+                text-align: center;
+                margin: .5rem 0;
+            }
+
+            & .span-svg {
+                border-radius: 50%;
+                transition: background-color .25s ease;
+
+                &.hidden {
+                    opacity: 0;
+                    cursor: initial;
+                    pointer-events: none;
+                }
+
+            }
+
+            & .span-svg__close {
+
+                border-radius: 0;
+                flex-shrink: 0;
+                position: absolute;
+                top: 5px;
+                right: 10px;
+                width: 25px;
+                height: 25px;
+                /* padding: .5rem; */
+            }
+
+        }
+
+
+        & .span-svg {
+            flex-grow: 1;
+            max-width: 32px;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+        }
+
+
+    }
+
+    & .container__body {
+
+        & .container__weeks,
+        & .container__days {
+            list-style-type: none;
+            display: flex;
+            padding: 0;
+
+
+            & li {
+                margin-top: .5rem;
+                width: calc(100% / 7);
+                text-align: center;
+            }
+
+        }
+
+        & .container__weeks {
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+
+        & .container__days {
+            display: flex;
+            margin: .5rem 0;
+            flex-wrap: wrap;
+
+            /* align-items: center; */
+
+            & li {
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                & input {
+                    display: none;
+
+                    &+label::before {
+                        content: '';
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        width: 100%;
+                        border-radius: 50%;
+                        height: 100%;
+                        z-index: -1;
+                        transform: translate(-50%, -50%);
+                        transition: background-color .25s ease;
+                    }
+
+                    &:checked+label::before {
+                        background-color: #0a6973;
+                    }
+                }
+
+                & label {
+                    width: 2rem;
+                    height: 2rem;
+                    text-align: center;
+                    cursor: pointer;
+                    color: var(--color-white);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: relative;
+
+                    &.days__inactive {
+                        cursor: initial;
+                        color: #aaa;
+                    }
+
+                }
+
+
+            }
+
+        }
+
+    }
+
+
+
+
+}
+
+
+
+@media (hover: hover) {
+    & .container__header {
+
+        & .pagination {
+            & .span-svg:hover {
+
+                background-color: #127475;
+
+
+                &.span-svg__close {
+                    background-color: transparent;
+                }
+            }
+        }
+
+    }
+}
+
+
+@keyframes fade-in {
+    from {
+        transform: translateY(-100%);
+    }
+
+}
+
+@keyframes fade-out {
+    to {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}

@@ -7,19 +7,19 @@ const useFetchList = endPointDefault => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [endPoint, setEndPoint] = useState(endPointDefault);
 
-	// const fetchData = () => {
-	// 	console.log('entra en fetch!!!');
-	// 	console.log({ endPoint });
-	// };
-
 	useEffect(() => {
-		if (endPoint && endPoint !== '')
-			fetchData(endPoint).then(res => {
+		fetchData(endPoint)
+			.then(res => {
 				console.log(res);
 
 				setData(res.data);
 				setIsLoading(res.isLoading);
+			})
+			.catch(e => {
+				console.log(e);
 			});
+
+
 	}, [endPoint]);
 
 	const changeEndPoint = endPointParam => {

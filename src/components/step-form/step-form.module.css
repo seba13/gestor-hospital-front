@@ -11,7 +11,7 @@
     transform: translate(-50%, -50%);
     background-color: rgba(0, 155, 172, 0.181);
     /* background-color: rgba(0, 0, 0, 0.432); */
-   
+
 
 
     &.fade-in-bg {
@@ -26,12 +26,15 @@
 
 
     & .date-schedule-container {
+        /* max-height: 550px; */
+        height: min(100%, 650px);
         position: absolute;
         background-color: #009bac;
         border-radius: 1rem;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        overflow: hidden;
 
         &.fade-in {
             animation: fade-in .5s cubic-bezier(.26, .53, .74, 1.48);
@@ -53,12 +56,21 @@
         padding-bottom: 1rem;
         z-index: 100;
 
-        & .span__close {
-            cursor: pointer;
-            position: absolute;
-            z-index: 200;
-            top: 10px;
-            right: 10px;
+
+
+        & .span-svg {
+            width: 28px;
+            height: 28px;
+
+            &.span__close {
+                cursor: pointer;
+                position: absolute;
+                z-index: 200;
+                width: 25px;
+                height: 25px;
+                top: 5px;
+                right: 10px;
+            }
         }
 
         & .form_group {

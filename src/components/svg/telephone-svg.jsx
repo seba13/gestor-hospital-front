@@ -4,6 +4,8 @@ const TelephoneSVG = props => (
 		fill='none'
 		viewBox='0 0 24 24'
 		{...props}
+		width={'100%'}
+		height={'100%'}
 	>
 		<path
 			stroke={props.stroke || '#000'}
