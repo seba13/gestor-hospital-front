@@ -8,6 +8,18 @@
 
     cursor: pointer;
 
+
+    &.disabled {
+        color: #adb5bd;
+        background-color: #264653;
+        cursor: initial;
+    }
+
+
+    &.active {
+        background-color: #023047;
+    }
+
     &.position__fixed {
         position: fixed;
         bottom: 230px;
@@ -64,4 +76,15 @@
     & .form-group:hover {
         background-color: var(--bg-color-green);
     }
+
+    & .disabled:hover {
+        background-color: #264653;
+    }
+
+    & .active:hover {
+        color: #fff;
+        background-color: #003049;
+    }
 }
+
+

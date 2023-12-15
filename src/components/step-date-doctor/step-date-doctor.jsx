@@ -4,13 +4,14 @@ import useDateDoctor from '../../hooks/use-date-doctor';
 import React, { useState } from 'react';
 
 import DoctorSpecialty from '../doctor-specialty/doctor-specialty';
-import ScheduleDoctor from '../schedule-doctor/input-schedule-doctor';
+import ScheduleDoctor from '../input-schedule/input-schedule-doctor';
 // import useFetchList from '../../hooks/use-fetch';
 import CalendarSVG from '../svg/calendar-svg';
 import DropDownSVG from '../svg/drop-down-svg';
 import ButtonDate from '../button-date/button-date';
 
 import InputDate from '../input-date/input-date';
+
 // import useSaveSchedule from '../../hooks/use-save-schedule';
 
 const StepDateDoctor = ({
@@ -30,12 +31,15 @@ const StepDateDoctor = ({
 	selectedMonth,
 	dayOfWeek,
 	diasLaborales,
+	buttonClass,
+	nameDoctor,
+	speacialtyDoctor,
 }) => {
 	// estados para el inputDate
 	const [openInputDate, setOpenInputDate] = useState(false);
 	const [animationEndInput, setAnimationEndInput] = useState(false);
 	const [closeInputDate, setCloseInputDate] = useState(false);
-
+	const [buttonClassActive, setButtonClassActive] = useState(buttonClass || 'disabled');
 	const {
 		changeIdDoctor,
 		changeEndPointAppointments,
@@ -82,6 +86,14 @@ const StepDateDoctor = ({
 		if (!openInputDate && !animationEndInput && idSelectedDoctor) return true;
 	};
 
+	const setButtonClass = () => {
+		if (buttonClassActive !== 'active') {
+			setButtonClassActive('active');
+
+			updateData({ buttonClass: 'active' });
+		}
+	};
+
 	return (
 		<div className={styles['form-step']}>
 			{!openInputDate && (
@@ -90,6 +102,9 @@ const StepDateDoctor = ({
 					updateData={updateData}
 					selectDoctor={selectDoctor}
 					idSelectedDoctor={idSelectedDoctor}
+					required={true}
+					nameDoctor={nameDoctor}
+					speacialtyDoctor={speacialtyDoctor}
 				></DoctorSpecialty>
 			)}
 
@@ -106,32 +121,34 @@ const StepDateDoctor = ({
 					updateData={updateData}
 					diasLaboralesMedico={diasLaboralesMedico}
 					selectDate={selectDate}
+					required={true}
+					setButtonClass={setButtonClass}
 				></InputDate>
 			)}
-			<div className={styles.container__date}>
-				<ButtonDate
-					LeftIconSVG={CalendarSVG}
-					RightIconSVG={DropDownSVG}
-					openInputDate={openInputDate}
-					animationEndInput={animationEndInput}
-					title={'CALENDARIO MÉDICO'}
-					onHandleClickButton={handleOpenInputDate}
-					openClass={rotarSVGBoton}
-					positionFixed={'position__fixed'}
-					// styleProps={{
-					// 	position: 'absolute',
-					// 	top: '0',
-					// 	right: '0px',
-					// 	zIndex: '260',
-					// }}
-					styleProps={{
-						position: 'fixed',
-						bottom: '250px',
-						right: '30px',
-						zIndex: '260',
-					}}
-				></ButtonDate>
 
+			<ButtonDate
+				LeftIconSVG={CalendarSVG}
+				RightIconSVG={DropDownSVG}
+				openInputDate={openInputDate}
+				animationEndInput={animationEndInput}
+				title={'CALENDARIO MÉDICO'}
+				onHandleClickButton={handleOpenInputDate}
+				openClass={rotarSVGBoton}
+				positionFixed={'position__fixed'}
+				// styleProps={{
+				// 	position: 'absolute',
+				// 	top: '0',
+				// 	right: '0px',
+				// 	zIndex: '260',
+				// }}
+				styleProps={{
+					position: 'absolute',
+					top: '380px',
+					right: '30px',
+					zIndex: '260',
+				}}
+			></ButtonDate>
+			<div className={styles.container__date}>
 				{/* <List
 					LeftSVG={DoctorSVG}
 					RightSVG={DropDownSVG}
@@ -147,6 +164,10 @@ const StepDateDoctor = ({
 					horarioCitasDisponibles={horarioCitasDisponibles}
 					idSelectedSchedule={idSelectedSchedule}
 					idSelectedDate={idSelectedDate}
+					required={true}
+					buttonClassActive={buttonClassActive}
+					nameDoctor={nameDoctor}
+					speacialtyDoctor={speacialtyDoctor}
 				></ScheduleDoctor>
 			</div>
 		</div>

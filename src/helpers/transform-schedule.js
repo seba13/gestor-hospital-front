@@ -234,6 +234,7 @@ const transformSchedule = horasCitaDoctor => {
 				hora_inicio: citaAgendada.hora_inicio,
 				hora_fin: citaAgendada.hora_fin,
 			},
+			id: `${horasCitaDoctor.fecha} ${formatHoraString(citaAgendada.hora_inicio)}`,
 			disponibilidad: false,
 			horaInicioString: formatHoraString(citaAgendada.hora_inicio),
 			horaFinString: formatHoraString(citaAgendada.hora_fin),

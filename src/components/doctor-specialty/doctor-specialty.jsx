@@ -2,7 +2,7 @@ import useDragDoctor from '../../hooks/use-drag-doctor';
 import styles from './doctor-specialty.module.css';
 import React from 'react';
 
-const DoctorSpecialty = ({ updateData, medicosEspecialidad, selectDoctor, idSelectedDoctor }) => {
+const DoctorSpecialty = ({ updateData, medicosEspecialidad, selectDoctor, idSelectedDoctor, nameDoctor }) => {
 	const { onPointerDownHandler, onPointerMoveHandler, onPointerCancelHandler } = useDragDoctor();
 
 	return (
@@ -31,7 +31,8 @@ const DoctorSpecialty = ({ updateData, medicosEspecialidad, selectDoctor, idSele
 								// almacena id medico en form step
 								updateData({ idSelectedDoctor: doctor.idMedico });
 								updateData({ selectedDoctor: doctor.idMedico });
-
+								updateData({ nameDoctor: `${doctor.nombre} ${doctor.paterno}` });
+								updateData({ speacialtyDoctor: `${doctor.especialidad}` });
 								// actualiza el endpoint
 								selectDoctor(doctor.idMedico);
 							}}

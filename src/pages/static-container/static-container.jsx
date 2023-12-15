@@ -1,15 +1,13 @@
-import { useEffect } from 'react';
 import NavStatic from '../static-nav/static-nav';
 import StaticSection from '../static-section/static-section';
 
 import styles from './static-container.module.css';
 
 const StaticContainer = () => {
-	useEffect(() => {
-		document.querySelector(`.${styles['static-container']}`).classList.add(`${styles['fade-in-animation-medical']}`);
-
-		document.querySelector(`.${styles['static-container__images']}`).classList.add(`${styles['fade-in']}`);
-	}, []);
+	// useEffect(() => {
+	// 	// document.querySelector(`.${styles['static-container']}`).classList.add(`${styles['fade-in-animation-medical']}`);
+	// 	// document.querySelector(`.${styles['static-container__images']}`).classList.add(`${styles['fade-in']}`);
+	// }, []);
 
 	const navItems = [
 		{
@@ -31,8 +29,8 @@ const StaticContainer = () => {
 	];
 
 	return (
-		<main className={`${styles['static-container']}`}>
-			<div className={styles['static-container__images']}>
+		<main className={`${styles['static-container']} ${styles['fade-in-animation-medical']}`}>
+			<div className={`styles['static-container__images'] ${styles['fade-in']}`}>
 				<div className={`${styles.virus} ${styles.virus__1}`}></div>
 				<div className={`${styles.virus} ${styles['virus__d-1']}`}></div>
 				<div className={`${styles.virus} ${styles['virus__d-2']}`}></div>

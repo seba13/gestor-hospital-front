@@ -1,9 +1,11 @@
 const useValidation = inputs => {
 	console.log(inputs);
 
-	return inputs.every(input => {
-		return input.value !== undefined;
+	const emptyValue = inputs.findIndex((input, index) => {
+		return input.value === undefined;
 	});
+
+	return emptyValue;
 };
 
 export default useValidation;

@@ -15,6 +15,7 @@ const InputDate = ({
 	updateData,
 	diasLaboralesMedico,
 	selectDate,
+	setButtonClass,
 }) => {
 	const refInputDate = useRef();
 
@@ -59,7 +60,8 @@ const InputDate = ({
 						<ArrowLeftSVG></ArrowLeftSVG>
 					</span>
 					<h2 className={styles.title__calendario}>
-						<span>{calendario && calendario.mes}</span> <span>{calendario && calendario.anio}</span>
+						<span className={styles.title__span}>{calendario && calendario.mes}</span>{' '}
+						<span>{calendario && calendario.anio}</span>
 					</h2>
 					<span className={`${styles['span-svg']}`} onClick={mesSiguiente}>
 						<ArrowRight></ArrowRight>
@@ -99,6 +101,8 @@ const InputDate = ({
 											updateData({ dayOfWeek: data.diaSemana });
 
 											selectDate({ fechaCitas: data.fecha, idDia: data.diaSemana });
+
+											setButtonClass();
 										}}
 										checked={idSelectedDate === data.id}
 									></input>

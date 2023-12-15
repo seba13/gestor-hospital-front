@@ -73,11 +73,15 @@
             }
         }
 
-        & .form_group {
+        & .form__group {
             text-align: center;
             margin: 2rem 0 0;
 
-            &.form_group__button {
+            &.form__group__button {
+                display: flex;
+                width: 100%;
+                justify-content: space-around;
+
                 & .button-submit {
                     border: none;
                     outline: none;

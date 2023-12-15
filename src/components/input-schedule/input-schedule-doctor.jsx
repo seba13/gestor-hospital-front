@@ -3,7 +3,15 @@ import styles from './input-schedule-doctor.module.css';
 import ButtonDate from '../button-date/button-date';
 import DropDownSVG from '../svg/drop-down-svg';
 import ClockSVG from '../svg/clock-svg';
-const InputScheduleDoctor = ({ updateData, horarioCitasDisponibles, idSelectedSchedule, idSelectedDate }) => {
+const InputScheduleDoctor = ({
+	updateData,
+	horarioCitasDisponibles,
+	idSelectedSchedule,
+	idSelectedDate,
+	buttonClassActive,
+	nameDoctor,
+	speacialtyDoctor,
+}) => {
 	const [open, setOPen] = useState(false);
 
 	const handleClickButton = () => {
@@ -19,11 +27,11 @@ const InputScheduleDoctor = ({ updateData, horarioCitasDisponibles, idSelectedSc
 					top: '0px',
 					right: '0px',
 					zIndex: '260',
-					backgroundColor: '#003049',
 				}}
 				LeftIconSVG={ClockSVG}
 				RightIconSVG={DropDownSVG}
 				title={'HORARIO MÉDICO'}
+				buttonClassActive={buttonClassActive}
 			></ButtonDate>
 			<div className={`${styles.wrapper__appointments} ${(open || '') && styles.open}`}>
 				{/* ARRAY CITAS DE DOCTOR (DISPONIBLES Y AGENDADAS) */}
@@ -47,8 +55,8 @@ const InputScheduleDoctor = ({ updateData, horarioCitasDisponibles, idSelectedSc
 								/>
 								<label htmlFor={horarioCita.id} className={styles.schedule__hour__element}>
 									<span className={styles.schedule__hour__text}>
-										<span className={styles.text__title}>Dr M. Smith</span>
-										<span className={styles.text__specialty}>cardiologist</span>
+										<span className={styles.text__title}>Dr {nameDoctor || ''} </span>
+										<span className={styles.text__specialty}>{speacialtyDoctor || ''}</span>
 									</span>
 									<span className={styles.schedule__hour__availability}>
 										<span className={styles.text__bold}>

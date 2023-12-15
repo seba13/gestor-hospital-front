@@ -10,13 +10,14 @@ const ButtonDate = ({
 	positionFixed,
 	positionAbsolute,
 	styleProps,
+	buttonClassActive
 }) => {
 	const [rotateSVG, setRotateSVG] = useState(false);
 
 	return (
 		<div
 			style={styleProps || {}}
-			className={`${styles['form-group']}  ${styles['form-group__date']}} ${styles[positionAbsolute] || ''} `}
+			className={`${styles['form-group']}  ${styles['form-group__date']}} ${styles[buttonClassActive] || ''} `}
 			onClick={() => {
 				onHandleClickButton();
 

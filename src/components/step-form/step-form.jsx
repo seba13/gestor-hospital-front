@@ -6,10 +6,10 @@ import UseStepForm from '../../hooks/use-step-form';
 import { useEffect, useState } from 'react';
 import StepDataPatient from '../step-data-patient/step-data-patient';
 
-import validationForm from '../../helpers/validationForm';
-
-const StepForm = ({ hideSchedule, endPointMedicosEspecialidad }) => {
+const StepForm = ({ hideSchedule, endPointMedicosEspecialidad, inputValidation }) => {
 	const initialData = {
+		nameDoctor: undefined,
+		specialtyDoctor: undefined,
 		idSelectedDoctor: undefined, // id medico seleccionado
 		selectedDoctor: undefined, // medico seleccionado
 		idSelectedSchedule: undefined, // id cita seleccionada
@@ -21,6 +21,7 @@ const StepForm = ({ hideSchedule, endPointMedicosEspecialidad }) => {
 		selectedDay: undefined, // dia seleccionado
 		dayOfWeek: undefined, // dia semana seleccionado
 		duracionCita: undefined,
+		buttonClass: 'disabled',
 		// endPointDateDoctor: '',
 		// endPointScheduleDoctor: '',
 	};
@@ -40,7 +41,8 @@ const StepForm = ({ hideSchedule, endPointMedicosEspecialidad }) => {
 	};
 
 	useEffect(() => {
-		console.log(data);
+		console.log('USE EFFECT STEP FORM');
+		console.log({ data });
 	}, [data]);
 
 	const { handleCancelSchedule } = useSaveSchedule(hideSchedule);
@@ -55,30 +57,62 @@ const StepForm = ({ hideSchedule, endPointMedicosEspecialidad }) => {
 		<StepDataPatient key={1} {...data} updateData={updateData}></StepDataPatient>,
 	]);
 
-	const inputValidation = () => {
+	const nextPage = e => {
+		e.preventDefault();
+
 		const inputs = [
 			{
 				type: 'checkbox',
 				id: data.idSelectedDoctor,
 				value: data.selectedDoctor,
 				name: 'select-doctor',
+				errorMessage: 'Médico: Para continuar seleccione un médico',
 			},
 			{
 				type: 'checkbox',
 				id: data.idSelectedDate,
 				value: data.selectedDate,
 				name: 'select-date',
+				errorMessage: 'Calendario médico: Para continuar seleccione una fecha del calendario médico',
 			},
 			{
 				type: 'checkbox',
 				id: data.idSelectedSchedule,
 				value: data.selectedSchedule,
 				name: 'select-appointment',
+				errorMessage: 'Horario médico: Para continuar seleccione una hora de cita',
 			},
 		];
 
-		return validationForm(inputs);
+		if (inputValidation(inputs)) {
+			next();
+		}
 	};
+
+	// const inputValidation = () => {
+	// 	const inputs = [
+	// 		{
+	// 			type: 'checkbox',
+	// 			id: data.idSelectedDoctor,
+	// 			value: data.selectedDoctor,
+	// 			name: 'select-doctor',
+	// 		},
+	// 		{
+	// 			type: 'checkbox',
+	// 			id: data.idSelectedDate,
+	// 			value: data.selectedDate,
+	// 			name: 'select-date',
+	// 		},
+	// 		{
+	// 			type: 'checkbox',
+	// 			id: data.idSelectedSchedule,
+	// 			value: data.selectedSchedule,
+	// 			name: 'select-appointment',
+	// 		},
+	// 	];
+
+	// 	return validationForm(inputs);
+	// };
 
 	return (
 		<div className={`${styles['wrapper-date-schedule']} `}>
@@ -87,7 +121,7 @@ const StepForm = ({ hideSchedule, endPointMedicosEspecialidad }) => {
 					{<CloseSVG width={24} height={24} />}
 				</span>
 				{step}
-				<div className={`${styles.form_group}  ${styles.form_group__button}`}>
+				<div className={`${styles.form__group}  ${styles.form__group__button}`}>
 					{!isFirstStep && (
 						<button
 							className={`${styles['button-submit']}`}
@@ -100,17 +134,7 @@ const StepForm = ({ hideSchedule, endPointMedicosEspecialidad }) => {
 						</button>
 					)}
 					{!isLastStep && (
-						<button
-							type='submit'
-							className={`${styles['button-submit']}`}
-							onClick={e => {
-								e.preventDefault();
-
-								if (inputValidation()) {
-									next();
-								}
-							}}
-						>
+						<button type='submit' className={`${styles['button-submit']}`} onClick={nextPage}>
 							CONTINUAR
 						</button>
 					)}

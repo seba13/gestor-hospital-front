@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import styles from './input-rut.module.css';
-import IdSVG from '../svg/id-svg';
+// import IdSVG from '../svg/id-svg';
 
-const InputRut = () => {
+const InputRut = ({ labelText }) => {
 	const [useRut, setRut] = useState('');
 
 	const handleKeyDown = e => {
-		if (e.key === 'Backspace' || e.key === 'Delete' || e.key === 'Control' || e.key === 'Alt' || e.key === 'Meta')
+		if (e.key === 'Backspace' || e.key === 'Delete' || e.key === 'Control' || e.key === 'Alt' || e.key === 'Meta' || e.key === 'Tab')
 			return;
 
 		if (
@@ -81,9 +81,10 @@ const InputRut = () => {
 
 	return (
 		<label className={styles['form-group']}>
-			<span className={`${styles['span-svg']} ${styles['span-svg__id-card']} `}>
+			{labelText ? <span className={styles['form-group__label-text']}>{labelText}:</span> : ''}
+			{/* <span className={`${styles['span-svg']} ${styles['span-svg__id-card']} `}>
 				<IdSVG fill={'#fff'}></IdSVG>
-			</span>
+			</span> */}
 			<input
 				type='text'
 				maxLength={13}
