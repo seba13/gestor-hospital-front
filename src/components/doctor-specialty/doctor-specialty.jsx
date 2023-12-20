@@ -1,4 +1,4 @@
- import useDragDoctor from '../../hooks/use-drag-doctor';
+import useDragDoctor from '../../hooks/use-drag-doctor';
 import styles from './doctor-specialty.module.css';
 import React from 'react';
 
@@ -44,7 +44,7 @@ const DoctorSpecialty = ({ updateData, medicosEspecialidad, selectDoctor, idSele
 							// id={doctor.id}
 							className={`${styles['doctor-element']}`}
 						>
-							{doctor.imagenUrl && <img src={doctor.imagenUrl}></img>}
+							{doctor.imagenUrl && <img src={`${import.meta.env.VITE_URL_API}${doctor.imagenUrl}`}></img>}
 
 							<div className={`${styles.text__container}`}>
 								<h3 className={`${styles.title}`}>{`Dr. ${doctor.nombre} ${doctor.paterno} ${doctor.materno}`}</h3>
