@@ -12,7 +12,7 @@ const useDateDoctor = ({
 	const [horarioCitasDisponibles, setHorarioCitasDisponibles] = useState([]);
 	const [listEspecialtyDoctor, setListEspecialtyDoctor] = useState([]);
 	const [diasLaboralesMedico, setDiasLaboralesMedico] = useState([]);
-
+	const [loadingImagesDoctor, setLoadingImagesDoctor] = useState([]);
 	// states para obtener horario citas
 	// para fecha citas se debe considerar que el inputDate guardado los meses van de 0 a 11
 	const [idMedico, setIdMedico] = useState(idSelectedDoctor || undefined);
@@ -23,9 +23,7 @@ const useDateDoctor = ({
 	// const [endPointDate, setEndPointDate] = useState(null);
 
 	// endPoint que carga las horas de citas a partir de una fecha
-	const [endPointAppointments] = useState(
-		`${import.meta.env.VITE_URL_API}/medicos/horario`
-	);
+	const [endPointAppointments] = useState(`${import.meta.env.VITE_URL_API}/medicos/horario`);
 
 	const changeEndPointAppointments = ({ idSelectedDoctor: newIdMedico, fechaCitas: newFecha, idDia: newIdDia }) => {
 		console.log('***************');
@@ -34,6 +32,10 @@ const useDateDoctor = ({
 		setIdMedico(newIdMedico);
 		setFechaCitas(newFecha);
 		setIdDia(newIdDia);
+	};
+
+	const imageLoadedDoctor = ({ idMedico }) => {
+		setLoadingImagesDoctor({ ...loadingImagesDoctor, [idMedico]: { loadingImage: false } });
 	};
 
 	const changeIdDoctor = idMedico => {
@@ -82,6 +84,18 @@ const useDateDoctor = ({
 				fetchData()
 					.get({ endPoint: endPointMedicosEspecialidad })
 					.then(res => {
+						const arrLoadinImgDoctor = res.data.reduce((prev, curr) => {
+							prev[curr.idMedico] = {
+								loadingImage: true,
+							};
+
+							return prev;
+						}, {});
+
+						console.log(arrLoadinImgDoctor);
+
+						setLoadingImagesDoctor(arrLoadinImgDoctor);
+
 						setListEspecialtyDoctor(res.data);
 					});
 			}
@@ -119,6 +133,8 @@ const useDateDoctor = ({
 		changeIdDoctor,
 		diasLaboralesMedico,
 		fetchDates,
+		loadingImagesDoctor,
+		imageLoadedDoctor,
 	};
 };
 export default useDateDoctor;

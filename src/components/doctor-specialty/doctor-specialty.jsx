@@ -2,7 +2,15 @@ import useDragDoctor from '../../hooks/use-drag-doctor';
 import styles from './doctor-specialty.module.css';
 import React from 'react';
 
-const DoctorSpecialty = ({ updateData, medicosEspecialidad, selectDoctor, idSelectedDoctor, nameDoctor }) => {
+const DoctorSpecialty = ({
+	updateData,
+	medicosEspecialidad,
+	selectDoctor,
+	idSelectedDoctor,
+	nameDoctor,
+	loadingImagesDoctor,
+	imageLoadedDoctor,
+}) => {
 	const { onPointerDownHandler, onPointerMoveHandler, onPointerCancelHandler } = useDragDoctor();
 
 	return (
@@ -44,7 +52,24 @@ const DoctorSpecialty = ({ updateData, medicosEspecialidad, selectDoctor, idSele
 							// id={doctor.id}
 							className={`${styles['doctor-element']}`}
 						>
-							{doctor.imagenUrl && <img src={`${import.meta.env.VITE_URL_API}${doctor.imagenUrl}`}></img>}
+							{doctor.imagenUrl && (
+								<div className={`${styles['wrapper-img']}`}>
+									<img
+										src={
+											`${import.meta.env.VITE_URL_API}${doctor.imagenUrl}` ||
+											'../../public/assets/img/doctor-animado.png'
+										}
+										onLoad={() => {
+											imageLoadedDoctor({ idMedico: doctor.idMedico });
+										}}
+										onError={e => {
+											imageLoadedDoctor({ idMedico: doctor.idMedico });
+											e.target.src = '../../public/assets/img/doctor-animado.png';
+										}}
+									></img>
+									{loadingImagesDoctor[doctor.idMedico].loadingImage && <span className={styles.loader}></span>}
+								</div>
+							)}
 
 							<div className={`${styles.text__container}`}>
 								<h3 className={`${styles.title}`}>{`Dr. ${doctor.nombre} ${doctor.paterno} ${doctor.materno}`}</h3>

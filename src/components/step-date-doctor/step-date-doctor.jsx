@@ -40,12 +40,16 @@ const StepDateDoctor = ({
 	const [animationEndInput, setAnimationEndInput] = useState(false);
 	const [closeInputDate, setCloseInputDate] = useState(false);
 	const [buttonClassActive, setButtonClassActive] = useState(buttonClass || 'disabled');
+
+
 	const {
 		changeIdDoctor,
 		changeEndPointAppointments,
 		listEspecialtyDoctor,
 		horarioCitasDisponibles,
 		diasLaboralesMedico,
+		loadingImagesDoctor,
+		imageLoadedDoctor
 	} = useDateDoctor({
 		endPointMedicosEspecialidad,
 		idSelectedDoctor,
@@ -107,6 +111,8 @@ const StepDateDoctor = ({
 					required={true}
 					nameDoctor={nameDoctor}
 					speacialtyDoctor={specialtyDoctor}
+					loadingImagesDoctor={loadingImagesDoctor}
+					imageLoadedDoctor={imageLoadedDoctor}
 				></DoctorSpecialty>
 			)}
 
