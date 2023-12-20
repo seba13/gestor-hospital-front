@@ -55,15 +55,13 @@ const DoctorSpecialty = ({
 							{doctor.imagenUrl && (
 								<div className={`${styles['wrapper-img']}`}>
 									<img
-										src={
-											`${import.meta.env.VITE_URL_API}${doctor.imagenUrl}` || '/public/assets/img/doctor-animado.png'
-										}
+										src={`${import.meta.env.VITE_URL_API}${doctor.imagenUrl}` || '/assets/img/doctor-animado.png'}
 										onLoad={() => {
 											imageLoadedDoctor({ idMedico: doctor.idMedico });
 										}}
 										onError={e => {
 											imageLoadedDoctor({ idMedico: doctor.idMedico });
-											e.target.src = '/public/assets/img/doctor-animado.png';
+											e.target.src = '/assets/img/doctor-animado.png';
 										}}
 									></img>
 									{loadingImagesDoctor[doctor.idMedico].loadingImage && <span className={styles.loader}></span>}
