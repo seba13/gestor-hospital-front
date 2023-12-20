@@ -1,7 +1,7 @@
 import styles from './step-date-doctor.module.css';
 // import List from '../list/list';
 import useDateDoctor from '../../hooks/use-date-doctor';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import DoctorSpecialty from '../doctor-specialty/doctor-specialty';
 import ScheduleDoctor from '../input-schedule/input-schedule-doctor';
@@ -41,7 +41,6 @@ const StepDateDoctor = ({
 	const [closeInputDate, setCloseInputDate] = useState(false);
 	const [buttonClassActive, setButtonClassActive] = useState(buttonClass || 'disabled');
 
-
 	const {
 		changeIdDoctor,
 		changeEndPointAppointments,
@@ -49,7 +48,7 @@ const StepDateDoctor = ({
 		horarioCitasDisponibles,
 		diasLaboralesMedico,
 		loadingImagesDoctor,
-		imageLoadedDoctor
+		imageLoadedDoctor,
 	} = useDateDoctor({
 		endPointMedicosEspecialidad,
 		idSelectedDoctor,
@@ -58,7 +57,9 @@ const StepDateDoctor = ({
 		diasLaborales,
 	});
 
-
+	useEffect(() => {
+		console.log({ loadingImagen: loadingImagesDoctor });
+	}, [loadingImagesDoctor]);
 
 	const selectDoctor = idMedico => {
 		changeIdDoctor(idMedico);

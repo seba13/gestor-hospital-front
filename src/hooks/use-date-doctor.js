@@ -35,7 +35,12 @@ const useDateDoctor = ({
 	};
 
 	const imageLoadedDoctor = ({ idMedico }) => {
-		setLoadingImagesDoctor({ ...loadingImagesDoctor, [idMedico]: { loadingImage: false } });
+		console.log('IMAGE LOADED DOCTOR');
+		console.log({ IDMEDICO: idMedico });
+
+		setLoadingImagesDoctor(prev => {
+			return { ...prev, [idMedico]: { loadingImage: false } };
+		});
 	};
 
 	const changeIdDoctor = idMedico => {
