@@ -1,0 +1,46 @@
+.success-svg {
+    .success-check {
+        fill: transparent;
+
+        /* stroke: red; */
+
+        stroke-dasharray: 70;
+        stroke-dashoffset: 70;
+        transform-box: fill-box;
+        animation: animation-check .5s 1.5s linear forwards;
+
+    }
+
+    .success-circle {
+        fill: none;
+        stroke: #00b4d8;
+        /* Agrega el color del trazo */
+        stroke-width: 1;
+        /* Ajusta el ancho del trazo según tus necesidades */
+        stroke-dasharray: 70;
+        stroke-dashoffset: 70;
+        animation: animation-circle 1.5s .5s ease forwards;
+
+        transform-box: fill-box;
+    }
+
+}
+
+
+@keyframes animation-circle {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+
+@keyframes animation-check {
+    40% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        fill: #00b4d8;
+        stroke-dashoffset: 0;
+    }
+}

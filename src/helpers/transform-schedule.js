@@ -1,4 +1,4 @@
-const transformSchedule = horasCitaDoctor => {
+const transformSchedule = async horasCitaDoctor => {
 	/**
 	 *  @type {Array.<{citas: Array.<{hora_inicio: Date, hora_fin: Date}>, disponibilidad: bool, horaInicioString: string, horaFinString: string, id: string, duracionCita: number}>}
 	 * 	@description Almacena todas las citas ya sean disponibles o agendadas
@@ -8,6 +8,8 @@ const transformSchedule = horasCitaDoctor => {
 	const arrCitas = [];
 
 	console.log('TRANSFORMSCHEDULE');
+
+	console.log({ horasCitaDoctor });
 
 	// data = {
 	// 		horas_doctor: [
@@ -105,12 +107,51 @@ const transformSchedule = horasCitaDoctor => {
 	 * @returns {bool}
 	 */
 	const colisionCita = (posibleCita, citasAgendadas) => {
+		console.log('validar colision');
 		return citasAgendadas.some(citaAgendada => {
-			return (
-				(posibleCita.hora_inicio >= citaAgendada.hora_inicio && posibleCita.hora_fin <= citaAgendada.hora_fin) ||
-				(posibleCita.hora_fin >= citaAgendada.hora_inicio && posibleCita.hora_fin <= citaAgendada.hora_fin) ||
-				(posibleCita.hora_inicio <= citaAgendada.hora_inicio && posibleCita.hora_fin >= citaAgendada.hora_fin)
-			);
+			if (posibleCita.hora_inicio < citaAgendada.hora_inicio && posibleCita.hora_fin >= citaAgendada.hora_fin)
+				return true;
+
+			if (
+				posibleCita.hora_inicio < citaAgendada.hora_inicio &&
+				posibleCita.hora_fin >= citaAgendada.hora_inicio &&
+				posibleCita.hora_fin <= citaAgendada.hora_fin
+			)
+				return true;
+
+			if (
+				posibleCita.hora_inicio >= citaAgendada.hora_inicio &&
+				posibleCita.hora_inicio <= citaAgendada.hora_fin &&
+				posibleCita.hora_fin >= citaAgendada.hora_fin
+			)
+				return true;
+
+			if (
+				posibleCita.hora_inicio >= citaAgendada.hora_inicio &&
+				posibleCita.hora_fin >= citaAgendada.hora_inicio &&
+				posibleCita.hora_fin <= citaAgendada.hora_fin
+			)
+				return true;
+
+			return false;
+
+			// return (
+			// 	(posibleCita.hora_inicio <= citaAgendada.hora_inicio && posibleCita.hora_fin >= citaAgendada.hora_fin) ||
+			// 	(posibleCita.hora_inicio <= citaAgendada.hora_inicio &&
+			// 		posibleCita.hora_fin >= citaAgendada.hora_inicio &&
+			// 		posibleCita.hora_fin <= citaAgendada.hora_fin) ||
+			// 	(posibleCita.hora_inicio > citaAgendada.hora_inicio && posibleCita.horaFin >= citaAgendada.hora_fin) ||
+			// 	(posibleCita.hora_inicio > citaAgendada.hora_inicio &&
+			// 		posibleCita.hora_fin > citaAgendada.hora_inicio &&
+			// 		posibleCita.hora_fin < citaAgendada.hora_fin)
+
+			// (posibleCita.hora_inicio.getTime() >= citaAgendada.hora_inicio.getTime() &&
+			// 	posibleCita.hora_fin.getTime() <= citaAgendada.hora_fin.getTime()) ||
+			// (posibleCita.hora_fin.getTime() >= citaAgendada.hora_inicio.getTime() &&
+			// 	posibleCita.hora_fin.getTime() <= citaAgendada.hora_fin.getTime()) ||
+			// (posibleCita.hora_inicio.getTime() <= citaAgendada.hora_inicio.getTime() &&
+			// 	posibleCita.hora_fin.getTime() >= citaAgendada.hora_fin.getTime())
+			// );
 		});
 	};
 
@@ -140,7 +181,6 @@ const transformSchedule = horasCitaDoctor => {
 
 			const dateHoraFin = new Date();
 			dateHoraFin.setHours(horaFin.horas, horaFin.minutos, 0);
-
 			prev.push({
 				date_hora_inicio: dateHoraInicio,
 				date_hora_fin: dateHoraFin,
@@ -183,6 +223,8 @@ const transformSchedule = horasCitaDoctor => {
 		const posibleHoraCita = intervaloAtencion.date_hora_inicio;
 
 		while (posibleHoraCita <= intervaloAtencion.date_hora_fin) {
+			console.log({ intervaloAtencion: intervaloAtencion.date_hora_fin });
+			console.log({ posibleHoraCita });
 			const duracionPosibleCita = new Date(posibleHoraCita);
 
 			duracionPosibleCita.setHours(
@@ -193,28 +235,30 @@ const transformSchedule = horasCitaDoctor => {
 			);
 			duracionPosibleCita.setSeconds(0);
 
-			if (
-				duracionPosibleCita > intervaloAtencion.date_hora_fin ||
-				colisionCita({ hora_inicio: posibleHoraCita, hora_fin: duracionPosibleCita }, citasAgendadas)
-			)
-				break;
+			console.log({ duracionPosibleCita });
 
-			const inicioCitaDisponible = new Date(posibleHoraCita);
-			const finCitaDisponible = new Date(posibleHoraCita);
-			finCitaDisponible.setHours(finCitaDisponible.getHours() + tramosCitas.duracion_cita.horas);
-			finCitaDisponible.setMinutes(finCitaDisponible.getMinutes() + tramosCitas.duracion_cita.minutos);
+			console.log({ intervaloFinAtencion: intervaloAtencion.date_hora_fin });
 
-			arrCitas.push({
-				cita: {
-					hora_inicio: inicioCitaDisponible,
-					hora_fin: finCitaDisponible,
-				},
-				disponibilidad: true,
-				id: `${horasCitaDoctor.fecha} ${formatHoraString(inicioCitaDisponible)}`,
-				horaInicioString: formatHoraString(inicioCitaDisponible),
-				horaFinString: formatHoraString(finCitaDisponible),
-				duracionCita: horasCitaDoctor.duracion_cita,
-			});
+			if (duracionPosibleCita > intervaloAtencion.date_hora_fin) break;
+
+			if (!colisionCita({ hora_inicio: posibleHoraCita, hora_fin: duracionPosibleCita }, citasAgendadas)) {
+				const inicioCitaDisponible = new Date(posibleHoraCita);
+				const finCitaDisponible = new Date(posibleHoraCita);
+				finCitaDisponible.setHours(finCitaDisponible.getHours() + tramosCitas.duracion_cita.horas);
+				finCitaDisponible.setMinutes(finCitaDisponible.getMinutes() + tramosCitas.duracion_cita.minutos);
+
+				arrCitas.push({
+					cita: {
+						hora_inicio: inicioCitaDisponible,
+						hora_fin: finCitaDisponible,
+					},
+					disponibilidad: true,
+					id: `${horasCitaDoctor.fecha} ${formatHoraString(inicioCitaDisponible)}`,
+					horaInicioString: formatHoraString(inicioCitaDisponible),
+					horaFinString: formatHoraString(finCitaDisponible),
+					duracionCita: horasCitaDoctor.duracion_cita,
+				});
+			}
 
 			posibleHoraCita.setHours(
 				posibleHoraCita.getHours() + tramosCitas.duracion_cita.horas + tramosCitas.duracion_descanso.horas
@@ -241,10 +285,16 @@ const transformSchedule = horasCitaDoctor => {
 		});
 	});
 
+	citasAgendadas.sort((a, b) => {
+		return a.hora_inicio - b.hora_inicio;
+	});
+
 	/**
 	 * Ordena las citas de forma ascendente segun el horario de inicio de la cit
 	 */
 	arrCitas.sort((a, b) => a.cita.hora_inicio - b.cita.hora_fin);
+
+	console.log({ arrCitas });
 
 	return { citas: arrCitas };
 };

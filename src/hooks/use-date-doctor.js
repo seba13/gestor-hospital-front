@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import transformSchedule from '../helpers/transform-schedule';
-import { fetchData, fechDataAppointments } from '../helpers/fetch-data';
+import { fetchData } from '../helpers/fetch-data';
 
 const useDateDoctor = ({
 	endPointMedicosEspecialidad,
@@ -9,8 +9,6 @@ const useDateDoctor = ({
 	selectedDate,
 	dayOfWeek,
 }) => {
-	
-
 	const [horarioCitasDisponibles, setHorarioCitasDisponibles] = useState([]);
 	const [listEspecialtyDoctor, setListEspecialtyDoctor] = useState([]);
 	const [diasLaboralesMedico, setDiasLaboralesMedico] = useState([]);
@@ -54,9 +52,17 @@ const useDateDoctor = ({
 			console.log({ idDia });
 
 			if (fechaCitas && idMedico && idDia) {
-				fechDataAppointments({ endPointAppointments, idMedico, fechaCitas, idDia }).then(response => {
-					setHorarioCitasDisponibles(transformSchedule(response.data));
-				});
+				const data = { idMedico, fechaCitas, idDia };
+
+				fetchData()
+					.post({ endPoint: endPointAppointments, data })
+					.then(response => {
+						// setHorarioCitasDisponibles(transformSchedule(response.data));
+
+						transformSchedule(response.data).then(arrCitas => {
+							setHorarioCitasDisponibles(arrCitas);
+						});
+					});
 			} else {
 				setHorarioCitasDisponibles([]);
 			}
@@ -73,9 +79,11 @@ const useDateDoctor = ({
 		() => () => {
 			// especialidad
 			if (endPointMedicosEspecialidad && endPointMedicosEspecialidad !== '') {
-				fetchData(endPointMedicosEspecialidad).then(res => {
-					setListEspecialtyDoctor(res.data);
-				});
+				fetchData()
+					.get({ endPoint: endPointMedicosEspecialidad })
+					.then(res => {
+						setListEspecialtyDoctor(res.data);
+					});
 			}
 		},
 		[endPointMedicosEspecialidad]
@@ -88,11 +96,15 @@ const useDateDoctor = ({
 	const fetchDates = useMemo(
 		() => () => {
 			if (idMedico && idMedico !== '') {
-				fetchData(
-					`${import.meta.env.VITE_DOMINIO}:${import.meta.env.VITE_APP_PORT}/medicos/${idMedico}/dias-citas/`
-				).then(res => {
-					setDiasLaboralesMedico(res.data);
-				});
+				fetchData()
+					.get({
+						endPoint: `${import.meta.env.VITE_DOMINIO}:${
+							import.meta.env.VITE_APP_PORT
+						}/medicos/${idMedico}/dias-citas/`,
+					})
+					.then(res => {
+						setDiasLaboralesMedico(res.data);
+					});
 			}
 		},
 		[idMedico]

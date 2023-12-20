@@ -10,7 +10,7 @@ const InputScheduleDoctor = ({
 	idSelectedDate,
 	buttonClassActive,
 	nameDoctor,
-	speacialtyDoctor,
+	specialtyDoctor,
 }) => {
 	const [open, setOPen] = useState(false);
 
@@ -35,6 +35,11 @@ const InputScheduleDoctor = ({
 			></ButtonDate>
 			<div className={`${styles.wrapper__appointments} ${(open || '') && styles.open}`}>
 				{/* ARRAY CITAS DE DOCTOR (DISPONIBLES Y AGENDADAS) */}
+
+				{/* <div style={{ position: 'absolute', zIndex: 800, color: 'red' }}>loading</div> */}
+
+
+
 				{horarioCitasDisponibles &&
 					horarioCitasDisponibles.citas &&
 					horarioCitasDisponibles.citas.map((horarioCita, index) => {
@@ -56,7 +61,7 @@ const InputScheduleDoctor = ({
 								<label htmlFor={horarioCita.id} className={styles.schedule__hour__element}>
 									<span className={styles.schedule__hour__text}>
 										<span className={styles.text__title}>Dr {nameDoctor || ''} </span>
-										<span className={styles.text__specialty}>{speacialtyDoctor || ''}</span>
+										<span className={styles.text__specialty}>{specialtyDoctor || ''}</span>
 									</span>
 									<span className={styles.schedule__hour__availability}>
 										<span className={styles.text__bold}>

@@ -8,7 +8,7 @@ const useFetchList = endPointDefault => {
 	const [endPoint, setEndPoint] = useState(endPointDefault);
 
 	useEffect(() => {
-		fetchData(endPoint)
+		fetchData({ endPoint })
 			.then(res => {
 				console.log(res);
 
@@ -18,8 +18,6 @@ const useFetchList = endPointDefault => {
 			.catch(e => {
 				console.log(e);
 			});
-
-
 	}, [endPoint]);
 
 	const changeEndPoint = endPointParam => {

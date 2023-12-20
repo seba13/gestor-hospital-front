@@ -1,0 +1,62 @@
+.spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.582);
+    transform: translate(-50%, -50%);
+    z-index: 800;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fade-in .25s ease;
+
+
+    & .span-svg {
+        width: 50%;
+        height: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+
+        & svg {
+            filter: drop-shadow(0 0 25px #00e6a8);
+            transform-box: fill-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            & g {
+
+                transform-box: fill-box;
+                stroke: #009970;
+                fill: transparent;
+                stroke-width: 6px;
+                animation: anim 1.5s linear infinite;
+                stroke-dasharray: 2000;
+                stroke-dashoffset: 2000;
+                transform: scale(1.5);
+            }
+
+        }
+
+    }
+
+
+
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+}
+
+@keyframes anim {
+    to {
+        stroke-dashoffset: 0;
+        opacity: 0;
+    }
+}

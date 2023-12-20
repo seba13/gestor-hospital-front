@@ -33,7 +33,7 @@ const StepDateDoctor = ({
 	diasLaborales,
 	buttonClass,
 	nameDoctor,
-	speacialtyDoctor,
+	specialtyDoctor,
 }) => {
 	// estados para el inputDate
 	const [openInputDate, setOpenInputDate] = useState(false);
@@ -53,6 +53,8 @@ const StepDateDoctor = ({
 		dayOfWeek,
 		diasLaborales,
 	});
+
+
 
 	const selectDoctor = idMedico => {
 		changeIdDoctor(idMedico);
@@ -104,7 +106,7 @@ const StepDateDoctor = ({
 					idSelectedDoctor={idSelectedDoctor}
 					required={true}
 					nameDoctor={nameDoctor}
-					speacialtyDoctor={speacialtyDoctor}
+					speacialtyDoctor={specialtyDoctor}
 				></DoctorSpecialty>
 			)}
 
@@ -167,7 +169,7 @@ const StepDateDoctor = ({
 					required={true}
 					buttonClassActive={buttonClassActive}
 					nameDoctor={nameDoctor}
-					speacialtyDoctor={speacialtyDoctor}
+					specialtyDoctor={specialtyDoctor}
 				></ScheduleDoctor>
 			</div>
 		</div>

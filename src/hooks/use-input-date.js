@@ -10,7 +10,11 @@ const useInputDate = ({ diasLaboralesMedico, selectedYear, selectedMonth }) => {
 	const [diasSemana] = useState(['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom']);
 
 	useEffect(() => {
-		setCalendario(transformDate({ diasLaboralesMedico, mes, anio }));
+		// setCalendario(transformDate({ diasLaboralesMedico, mes, anio }));
+
+		transformDate({ diasLaboralesMedico, mes, anio }).then(arrCalendario => {
+			setCalendario(arrCalendario);
+		});
 	}, [mes]);
 
 	const mesSiguiente = () => {

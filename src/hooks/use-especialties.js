@@ -6,10 +6,12 @@ const useEspecialties = () => {
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		fetchData(`${import.meta.env.VITE_DOMINIO}:${import.meta.env.VITE_APP_PORT}/medicos/especialidades`).then(res => {
-			setSpecialties(res.data);
-			setIsLoading(res.isLoading);
-		});
+		fetchData()
+			.get({ endPoint: `${import.meta.env.VITE_DOMINIO}:${import.meta.env.VITE_APP_PORT}/medicos/especialidades` })
+			.then(res => {
+				setSpecialties(res.data);
+				setIsLoading(res.isLoading);
+			});
 	}, []);
 
 	return {

@@ -3,8 +3,6 @@ import { useState } from 'react';
 const UseStepForm = steps => {
 	const [currentStepIndex, setCurrentStepIndex] = useState(0);
 	
-
-
 	const next = () => {
 		setCurrentStepIndex(i => {
 			if (i >= steps.length - 1) return i;

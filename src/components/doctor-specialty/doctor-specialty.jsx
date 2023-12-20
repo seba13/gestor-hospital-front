@@ -1,4 +1,4 @@
-import useDragDoctor from '../../hooks/use-drag-doctor';
+ import useDragDoctor from '../../hooks/use-drag-doctor';
 import styles from './doctor-specialty.module.css';
 import React from 'react';
 
@@ -32,7 +32,7 @@ const DoctorSpecialty = ({ updateData, medicosEspecialidad, selectDoctor, idSele
 								updateData({ idSelectedDoctor: doctor.idMedico });
 								updateData({ selectedDoctor: doctor.idMedico });
 								updateData({ nameDoctor: `${doctor.nombre} ${doctor.paterno}` });
-								updateData({ speacialtyDoctor: `${doctor.especialidad}` });
+								updateData({ specialtyDoctor: `${doctor.especialidad}` });
 								// actualiza el endpoint
 								selectDoctor(doctor.idMedico);
 							}}

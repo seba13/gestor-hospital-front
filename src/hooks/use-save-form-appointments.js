@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from '../components/step-form/step-form.module.css';
 
-const useSaveFormAppointment = hideSchedule => {
+const useCloseForm = hideSchedule => {
 	const [animationEndContainer, setAnimationEndContainer] = useState(false);
 	const [animationEndWrapper, setAnimationEndWrapper] = useState(false);
 
@@ -69,4 +69,4 @@ const useSaveFormAppointment = hideSchedule => {
 	};
 };
 
-export default useSaveFormAppointment;
+export default useCloseForm;

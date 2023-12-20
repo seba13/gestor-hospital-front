@@ -30,7 +30,7 @@ const StaticContainer = () => {
 
 	return (
 		<main className={`${styles['static-container']} ${styles['fade-in-animation-medical']}`}>
-			<div className={`styles['static-container__images'] ${styles['fade-in']}`}>
+			<div className={`${styles['static-container__images']} ${styles['fade-in']}`}>
 				<div className={`${styles.virus} ${styles.virus__1}`}></div>
 				<div className={`${styles.virus} ${styles['virus__d-1']}`}></div>
 				<div className={`${styles.virus} ${styles['virus__d-2']}`}></div>

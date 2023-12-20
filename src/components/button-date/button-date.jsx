@@ -10,7 +10,7 @@ const ButtonDate = ({
 	positionFixed,
 	positionAbsolute,
 	styleProps,
-	buttonClassActive
+	buttonClassActive,
 }) => {
 	const [rotateSVG, setRotateSVG] = useState(false);
 
@@ -19,7 +19,7 @@ const ButtonDate = ({
 			style={styleProps || {}}
 			className={`${styles['form-group']}  ${styles['form-group__date']}} ${styles[buttonClassActive] || ''} `}
 			onClick={() => {
-				onHandleClickButton();
+				onHandleClickButton && onHandleClickButton();
 
 				// funcion que retorna bool para mover svg icon
 				if (openClass) {

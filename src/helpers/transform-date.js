@@ -6,7 +6,7 @@
  * @param {number} dataCalendario.anio
  * @returns
  */
-const transformDate = ({ diasLaboralesMedico, mes, anio }) => {
+const transformDate = async({ diasLaboralesMedico, mes, anio }) => {
 	const arrDiasTrabajo = diasLaboralesMedico.reduce((prev, curr) => {
 		prev[curr] = true;
 

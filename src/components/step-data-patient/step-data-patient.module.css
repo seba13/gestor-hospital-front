@@ -5,13 +5,38 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: auto;
+
     /* margin-top: 1rem; */
+    /* margin-top: 1rem; */
+
+
+    /* Scrollbar */
+
+    & {
+        /* For Firefox */
+        overflow-y: auto;
+        scrollbar-color: var(--bg-color-green-2) var(--bg-color-green);
+        scrollbar-width: thin;
+    }
+
+    /* For Chrome and other browsers except Firefox */
+    &::-webkit-scrollbar {
+        width: 0.5em;
+        background-color: var(--bg-color-green);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--bg-color-green-2);
+    }
+
 
     & .step__title {
         text-align: center;
         text-transform: capitalize;
         margin-bottom: 2rem;
         font-weight: 500;
+
     }
 
 
@@ -20,19 +45,71 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: min(400px, 100%);
+        width: min(500px, 100%);
         max-height: 420px;
         height: 420px;
+        gap: 1rem;
 
+        .form-group--double {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            width: min(100%, 500px);
+
+            &>label {
+                width: min(50%, 250px);
+
+
+                &:first-child {
+                    padding-right: .3rem;
+                }
+
+                &:last-child {
+                    padding-left: .3rem;
+                }
+
+            }
+
+        }
 
 
 
         .form-group {
 
-            width: min(100%, 400px);
+            width: min(100%, 500px);
+
             display: flex;
             flex-direction: column;
             padding: 0 1rem 1rem 1rem;
+            position: relative;
+
+
+            & .error-message {
+                position: absolute;
+                color: #fff;
+                border-radius: .5rem;
+                /* width: 300px; */
+                background-color: #ff0054;
+                bottom: -12px;
+                width: max-content;
+                padding: .1rem 1rem;
+                text-transform: uppercase;
+                animation: fade-in .45s ease;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    left: 20px;
+                    top: -5px;
+                    border-left: 5px solid transparent;
+                    border-right: 5px solid transparent;
+                    border-bottom: 5px solid #ff0054;
+                    border-top: 0px solid transparent;
+                    z-index: 1000;
+                    /* transform: rotate(45deg); */
+                }
+            }
+
 
             /* display: flex;
             align-items: center;
@@ -59,9 +136,9 @@
             & .input-text {
                 /* width: auto; */
                 /* width: 100%; */
-
+                border: 1px solid transparent;
                 padding: .5rem 1rem;
-                border: none;
+                transition: border .45s ease;
                 border-radius: .5rem;
                 /* background-color: transparent; */
                 background-color: #006d77;
@@ -72,10 +149,108 @@
                     color: #aaaa;
                 }
 
+                &.invalid {
+                    border: 1px solid #ff0054;
+                    /* color: red; */
+                }
+
             }
 
 
         }
+
+
+
+
+        .form-group__telephone {
+            display: flex;
+            align-items: center;
+            /* padding: .5rem 0; */
+            /* background-color: #006d77; */
+            /* border-radius: .5rem; */
+
+            & span {
+
+                padding-left: .5rem;
+                /* white-space: nowrap;
+                padding: .5rem 1rem;
+                padding-right: .25rem;
+                border: none;
+                border-radius: .5rem;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0; */
+                /* background-color: transparent; */
+                /* background-color: #006d77;
+                outline: none;
+                color: #ffffff66;
+                font-size: 1rem; */
+
+                position: absolute;
+            }
+
+            & .input-text {
+                /* padding: 0 1rem; */
+                padding-left: 2.6rem;
+                width: 100%;
+                margin-left: -1px;
+            }
+
+
+            /* ocultar button input type number */
+            & input::-webkit-outer-spin-button,
+            & input::-webkit-inner-spin-button {
+                /* display: none; <- Crashes Chrome on hover */
+                -webkit-appearance: none;
+                margin: 0;
+                /* <-- Apparently some margin are still there even though it's hidden */
+            }
+
+            & input[type=number] {
+                appearance: textfield;
+                -moz-appearance: textfield;
+                /* Firefox */
+            }
+
+        }
     }
 
+}
+
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+}
+
+@media screen and (max-width: 500px) {
+
+    .form-step {
+        & .container__input {
+            margin-top: 3rem;
+            width: 80%;
+
+            .form-group--double {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                width: min(100%, 500px);
+                gap: 1rem;
+
+                &>label {
+                    width: 100%;
+
+
+                    &:first-child {
+                        padding-right: 1rem;
+                    }
+
+                    &:last-child {
+                        padding-left: 1rem;
+                    }
+
+                }
+            }
+        }
+    }
 }
