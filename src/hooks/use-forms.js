@@ -68,7 +68,7 @@ const useForm = ({ initialData, initialErrors, validateForm }) => {
 		setLoading(true);
 		fetchData()
 			.post({
-				endPoint: `${import.meta.env.VITE_DOMINIO}:${import.meta.env.VITE_APP_PORT}/citas/agendar`,
+				endPoint: `${import.meta.env.VITE_URL_API}/citas/agendar`,
 				data,
 			})
 			.then(response => {

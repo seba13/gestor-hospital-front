@@ -24,7 +24,7 @@ const useDateDoctor = ({
 
 	// endPoint que carga las horas de citas a partir de una fecha
 	const [endPointAppointments] = useState(
-		`${import.meta.env.VITE_DOMINIO}:${import.meta.env.VITE_APP_PORT}/medicos/horario`
+		`${import.meta.env.VITE_URL_API}/medicos/horario`
 	);
 
 	const changeEndPointAppointments = ({ idSelectedDoctor: newIdMedico, fechaCitas: newFecha, idDia: newIdDia }) => {
@@ -98,9 +98,7 @@ const useDateDoctor = ({
 			if (idMedico && idMedico !== '') {
 				fetchData()
 					.get({
-						endPoint: `${import.meta.env.VITE_DOMINIO}:${
-							import.meta.env.VITE_APP_PORT
-						}/medicos/${idMedico}/dias-citas/`,
+						endPoint: `${import.meta.env.VITE_URL_API}/medicos/${idMedico}/dias-citas/`,
 					})
 					.then(res => {
 						setDiasLaboralesMedico(res.data);

@@ -9,7 +9,7 @@ const useOpenScheduleForm = () => {
 			setSelectOption(true);
 
 			setEndPointEspecialidad(
-				`${import.meta.env.VITE_DOMINIO}:${import.meta.env.VITE_APP_PORT}/medicos/especialidad/${id}`
+				`${import.meta.env.VITE_URL_API}/medicos/especialidad/${id}`
 			);
 		}
 	};

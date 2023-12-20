@@ -7,7 +7,7 @@ const useEspecialties = () => {
 
 	useEffect(() => {
 		fetchData()
-			.get({ endPoint: `${import.meta.env.VITE_DOMINIO}:${import.meta.env.VITE_APP_PORT}/medicos/especialidades` })
+			.get({ endPoint: `${import.meta.env.VITE_URL_API}/medicos/especialidades` })
 			.then(res => {
 				setSpecialties(res.data);
 				setIsLoading(res.isLoading);

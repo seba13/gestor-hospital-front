@@ -9,5 +9,4 @@ Currently, two official plugins are available:
 
 .env
 
-VITE_APP_PORT = 80
-VITE_DOMINIO = http://localhost
+VITE_URL_API = http://192.168.0.19:80
