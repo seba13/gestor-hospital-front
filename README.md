@@ -9,4 +9,24 @@ Currently, two official plugins are available:
 
 .env
 
-VITE_URL_API = http://192.168.0.19:80
+VITE_URL_API = http://localhost:80
+
+
+
+
+<!-- web app -->
+https://clinica-front.onrender.com
+
+# servicios
+
+## empleados
+
+https://clinica-backend-servicio-empleados.onrender.com
+
+## citas
+
+https://clinica-backend-servicio-citas.onrender.com
+
+## usuarios
+
+https://clinica-backend-servicio-usuarios.onrender.com

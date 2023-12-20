@@ -23,13 +23,13 @@ const StaticNav = ({ navItems }) => {
 
 	return (
 		<nav className={styles.nav}>
-			<span className={styles.nav__logo}>LOGO</span>
+			<span className={styles.nav__logo}>
+				<a className={styles.logo} href='/'></a>
+			</span>
 
 			{isMobile && (
 				<span
-					className={`${styles.nav__hamburger}  ${
-						showNav ? styles['nav__hamburger--active'] : ''
-					}`}
+					className={`${styles.nav__hamburger}  ${showNav ? styles['nav__hamburger--active'] : ''}`}
 					onClick={handleNavStatic}
 				>
 					<span></span>
