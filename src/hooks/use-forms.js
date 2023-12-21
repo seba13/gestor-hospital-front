@@ -6,7 +6,7 @@ const useForm = ({ initialData, initialErrors, validateForm }) => {
 	const [errors, setErrors] = useState(initialErrors);
 	const [loading, setLoading] = useState(false);
 	const [responseFetch, setResponseFetch] = useState(undefined);
-
+	const [buttonSubmitClick, setButtonSubmitClick] = useState(false);
 	const handleChange = e => {
 		const { name, value } = e.target || e;
 
@@ -22,6 +22,51 @@ const useForm = ({ initialData, initialErrors, validateForm }) => {
 			});
 		}
 	};
+
+	useEffect(() => {
+		let error = null;
+		for (const name in errors) {
+			if (errors[name]) {
+				error = true;
+				break;
+			}
+		}
+
+		if (buttonSubmitClick && !error) {
+			const data = {
+				rut: form.rut,
+				dv: form.dv,
+				idMedico: form.idSelectedDoctor,
+				hora: form.selectedSchedule,
+				fecha: form.selectedDate,
+				email: form.inputEmailPatient,
+				duracionCita: form.duracionCita,
+				nombre: form.inputNamePatient,
+				paterno: form.inputFatherLastNamePatient,
+				materno: form.inputMotherLastName,
+				telefono: form.inputTelephonePatient,
+				diaSemana: form.dayOfWeek,
+			};
+
+			setLoading(true);
+			fetchData()
+				.post({
+					endPoint: `${import.meta.env.VITE_URL_API}/citas/agendar`,
+					data,
+				})
+				.then(response => {
+					setLoading(false);
+
+					console.log('aca respuesta');
+					console.log(response);
+
+					setResponseFetch(response.data);
+					buttonSubmitClick(false);
+				});
+		} else {
+			setButtonSubmitClick(false);
+		}
+	}, [buttonSubmitClick, errors]);
 
 	const handleBlur = e => {
 		const { name, value } = e.target || e;
@@ -46,41 +91,8 @@ const useForm = ({ initialData, initialErrors, validateForm }) => {
 				handleChange(input);
 			}
 		}
-		for (const name in errors) {
-			if (errors[name]) return;
-		}
 
-		const data = {
-			rut: form.rut,
-			dv: form.dv,
-			idMedico: form.idSelectedDoctor,
-			hora: form.selectedSchedule,
-			fecha: form.selectedDate,
-			email: form.inputEmailPatient,
-			duracionCita: form.duracionCita,
-			nombre: form.inputNamePatient,
-			paterno: form.inputFatherLastNamePatient,
-			materno: form.inputMotherLastName,
-			telefono: form.inputTelephonePatient,
-			diaSemana: form.dayOfWeek,
-		};
-
-		setLoading(true);
-		fetchData()
-			.post({
-				endPoint: `${import.meta.env.VITE_URL_API}/citas/agendar`,
-				data,
-			})
-			.then(response => {
-				setLoading(false);
-
-				console.log('aca respuesta');
-				console.log(response);
-
-				setResponseFetch(response.data);
-			});
-
-		console.log(data);
+		setButtonSubmitClick(true);
 	};
 
 	useEffect(() => {
