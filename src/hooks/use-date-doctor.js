@@ -26,8 +26,6 @@ const useDateDoctor = ({
 	const [endPointAppointments] = useState(`${import.meta.env.VITE_URL_API}/medicos/horario`);
 
 	const changeEndPointAppointments = ({ idSelectedDoctor: newIdMedico, fechaCitas: newFecha, idDia: newIdDia }) => {
-		console.log('***************');
-		console.log({ newFecha });
 
 		setIdMedico(newIdMedico);
 		setFechaCitas(newFecha);
@@ -35,9 +33,6 @@ const useDateDoctor = ({
 	};
 
 	const imageLoadedDoctor = ({ idMedico }) => {
-		console.log('IMAGE LOADED DOCTOR');
-		console.log({ IDMEDICO: idMedico });
-
 		setLoadingImagesDoctor(prev => {
 			return { ...prev, [idMedico]: { loadingImage: false } };
 		});

@@ -57,13 +57,16 @@ const DoctorSpecialty = ({
 									<img
 										src={`${import.meta.env.VITE_URL_API}${doctor.imagenUrl}`}
 										onLoad={() => {
-											console.log({ idMedicoONLOAD: doctor.idMedico, nombreMedico: doctor.nombre });
 											imageLoadedDoctor({ idMedico: doctor.idMedico });
+
+											return true;
 										}}
 										onError={e => {
-											console.log({ idMedicoONERROR: doctor.idMedico, nombreMedico: doctor.nombre });
 											e.target.src = '/assets/img/doctor-animado.png';
 											imageLoadedDoctor({ idMedico: doctor.idMedico });
+
+											e.target.onerror = null;
+											return true;
 										}}
 									></img>
 									{loadingImagesDoctor[doctor.idMedico].loadingImage && <span className={styles.loader}></span>}

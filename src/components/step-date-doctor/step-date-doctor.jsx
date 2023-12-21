@@ -1,7 +1,7 @@
 import styles from './step-date-doctor.module.css';
 // import List from '../list/list';
 import useDateDoctor from '../../hooks/use-date-doctor';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import DoctorSpecialty from '../doctor-specialty/doctor-specialty';
 import ScheduleDoctor from '../input-schedule/input-schedule-doctor';
@@ -56,10 +56,6 @@ const StepDateDoctor = ({
 		dayOfWeek,
 		diasLaborales,
 	});
-
-	useEffect(() => {
-		console.log({ loadingImagen: loadingImagesDoctor });
-	}, [loadingImagesDoctor]);
 
 	const selectDoctor = idMedico => {
 		changeIdDoctor(idMedico);
