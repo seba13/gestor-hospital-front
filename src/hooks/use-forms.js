@@ -61,7 +61,7 @@ const useForm = ({ initialData, initialErrors, validateForm }) => {
 					console.log(response);
 
 					setResponseFetch(response.data);
-					buttonSubmitClick(false);
+					setButtonSubmitClick(false);
 				});
 		} else {
 			setButtonSubmitClick(false);
